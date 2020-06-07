@@ -7,7 +7,7 @@ import datetime as dt
 # Function to initialize the browser, create a data dictionary and end WebDriver and return the scraped data
 def scrape_all():
     # Initiate headless driver for deployment
-    browser = Browser("chrome", executable_path="chromedriver", headless=True)
+    browser = Browser("chrome", executable_path="chromedriver", headless=False)
 
     # Set the executable path and initialize the chrome browser in splinter
     executable_path = {'executable_path': 'chromedriver'}
@@ -110,6 +110,34 @@ def scrape_all():
         # Convert our DataFrame back into HTML-ready code using the .to_html() function
         return df.to_html()
 
+    # Scrape the full resolution images    
+    def Mars_hemispheres_HDImages(browser):
+        # Visit URL
+        url = 'https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars'
+        browser.visit(url)     
+        
+        mars_hemispheres = []
+        for x in range(4):
+            full_image_hem = browser.find_by_css('a.product-item h3')[x]
+            full_image_hem.click()
+
+            # Parse the resulting html with soup
+            html = browser.html
+            img_soup = BeautifulSoup(html, 'html.parser')
+
+            #try:
+            # Find the relative image url
+            img_url_HD = img_soup.find('a',text='Sample').get('href')
+            img_title = img_soup.find('h2', class_='title').text
+            #except AttributeError:
+            #    return None
+
+            mars_hemispheres.append({'title':img_title,'img_url':img_url_HD}) 
+
+            print("NEW PAGE\n" + browser.html)
+            browser.back()
+        
+        return mars_hemispheres
 
     # Run all scraping functions and store results in dictionary
     data = {
@@ -117,6 +145,7 @@ def scrape_all():
         "news_paragraph": news_p,
         "featured_image": featured_image(browser),
         "facts": mars_facts(),
+        "Hemispheres": Mars_hemispheres_HDImages(browser),
         "last_modified": dt.datetime.now()
     }
 

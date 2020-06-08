@@ -8,8 +8,14 @@
   
 - Summary
   - Obtain high-resolution images for each of Mars's hemispheres using Beautiful and Splinter to scrape the images, click each hemisphere’s link to access the full-resolution image’s URL.
-  - Both the image URL string (for the full-resolution image) and the hemisphere title (with the name) were saved uisng a Python dictionary to store the data using the keys `img_url` and `title`.
+  - Both the image URL string (for the full-resolution image) and the hemisphere title (with the name) were saved using a Python dictionary to store the data using the keys `img_url` and `title`.
   - Append the dictionary with the image URL string and the hemisphere title to a list. This list will contain one dictionary for each hemisphere.
   - Using Flask, store the data scraped in a MongoDB.  Finally Bootstrap was used to style the web page.
+
+- Files for challenge:
+  - scraping.py (python file to scrape Mars data)
+  - app.py (Flask app)
+  - templates folder (index.html is inside this folder)
+![Mission_to_Mars.png](https://github.com/DahianaMC/Mission-to-Mars/blob/master/Mission_to_Mars.png)
   
   

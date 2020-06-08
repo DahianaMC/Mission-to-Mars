@@ -16,6 +16,8 @@
   - scraping.py (python file to scrape Mars data)
   - app.py (Flask app)
   - templates folder (index.html is inside this folder)
+  
+## Screenshot of Mission of Mars
 ![Mission_to_Mars.png](https://github.com/DahianaMC/Mission-to-Mars/blob/master/Mission_to_Mars.png)
   
   
